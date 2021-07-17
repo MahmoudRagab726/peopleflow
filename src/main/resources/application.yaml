@@ -1,0 +1,24 @@
+database:
+  name: ${DB_NAME:PeopleFlow}
+spring:
+  application:
+    name: PeopleFlow
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:root}
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${database.name}
+  liquibase:
+    change-log: classpath:/liquibase/master.xml
+    default-schema: ${database.name}
+    password: ${spring.datasource.password}
+    url: ${spring.datasource.url}?createDatabaseIfNotExist=true
+    user: ${spring.datasource.username}
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+server:
+  port: 9090
